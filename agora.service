@@ -1,0 +1,21 @@
+[Unit]
+Description=Agora research node
+After=network-online.target
+Wants=network-online.target
+[Service]
+Type=simple
+User=agora
+Group=agora
+WorkingDirectory=/var/lib/agora
+EnvironmentFile=/etc/agora/agora.env
+ExecStart=/usr/local/bin/agora -listen 127.0.0.1:8080 -data /var/lib/agora
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/agora
+UMask=0077
+[Install]
+WantedBy=multi-user.target
